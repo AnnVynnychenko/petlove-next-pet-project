@@ -1,11 +1,25 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
+  --background: #ffffff;
+  --foreground: #262626;
+}
 
+@theme {
+  --font-manrope: var(--font-manrope), sans-serif;
+  --color-accent: #f6b83d;
+  --color-white: #ffffff;
+  --color-bgPrimary: #f9f9f9;
+  --color-lightAccent: #fff4df;
+  --color-female: #f43f5e;
+  --color-male: #54adff;
+  --color-rejected: #ef2447;
+  --color-approve: #08aa83;
 }
 
 body {
-  background: var(--background);
+  font-family: var(--font-manrope), Arial, sans-serif;
+  font-weight: 500;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
 }
