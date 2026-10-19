@@ -1,12 +1,14 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
+  --background: #cccccc;
   --foreground: #262626;
 }
 
 @theme {
   --font-manrope: var(--font-manrope), sans-serif;
+
+  --color-textMain: var(--foreground);
   --color-accent: #f6b83d;
   --color-white: #ffffff;
   --color-bgPrimary: #f9f9f9;
@@ -15,11 +17,83 @@
   --color-male: #54adff;
   --color-rejected: #ef2447;
   --color-approve: #08aa83;
+
+  --ease-custom: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-custom: 300ms;
 }
 
 body {
+  margin: 0;
+
   font-family: var(--font-manrope), Arial, sans-serif;
   font-weight: 500;
   color: var(--foreground);
+
   background: var(--background);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  display: block;
+  padding: 0;
+  border: none;
+  font: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+address {
+  font-style: normal;
+}
+
+figure {
+  margin: 0;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
