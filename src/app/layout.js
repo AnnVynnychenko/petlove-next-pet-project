@@ -17,8 +17,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
+        <div className="px-5 py-2.5">
+          <Header />
+          <main className="flex-1">{children}</main>
+        </div>
       </body>
     </html>
   );
