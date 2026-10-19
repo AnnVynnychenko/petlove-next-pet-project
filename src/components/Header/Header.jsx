@@ -1,15 +1,15 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Logo from '@/components/Logo';
-import BurgerMenuIcon from '@/components/BurgerMenuIcon';
-import UserAvatar from '@/components/UserAvatar';
+import Logo from '@/components/Header/Logo';
+import BurgerMenuIcon from '@/components/Header/BurgerMenu/BurgerMenuIcon';
+import UserAvatar from '@/components/Header/UserAvatar';
 
 export default function Header() {
   const pathname = usePathname();
 
   //поки немає реестрації
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   const isHome =
     pathname === '/' ||
