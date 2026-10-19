@@ -1,6 +1,7 @@
 import { Manrope } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header/Header';
+import { clampBuilder } from '@/helpers/clampBuilder';
 
 const manrope = Manrope({
   variable: '--font-manrope',
@@ -14,10 +15,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const containerPadding = clampBuilder(8, 20);
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <div className="px-5 py-2.5">
+        <div style={{ paddingInline: containerPadding }} className="py-2.5">
           <Header />
           <main className="flex-1">{children}</main>
         </div>
