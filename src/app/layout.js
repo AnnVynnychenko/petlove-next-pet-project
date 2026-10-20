@@ -18,8 +18,11 @@ export default function RootLayout({ children }) {
   const containerPadding = clampBuilder(8, 20);
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
-        <div style={{ paddingInline: containerPadding }} className="py-2.5">
+      <body className="min-h-full">
+        <div
+          style={{ paddingInline: containerPadding }}
+          className="flex flex-col flex-1"
+        >
           <Header />
           <main className="flex-1">{children}</main>
         </div>
