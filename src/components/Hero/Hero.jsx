@@ -1,10 +1,12 @@
+import Image from 'next/image';
 import { clampBuilder } from '@/helpers/clampBuilder';
+import heroImg from '@images/hero/hero-img.webp';
 
 export default function Hero() {
   const textSize = clampBuilder(45, 50);
   return (
-    <section className="w-full pt-10.5 pb-12.5 bg-accent rounded-b-[30px] -mt-[1px]">
-      <div className="flex flex-col items-center justify-items-center gap-6 px-5">
+    <section className="w-full ">
+      <div className="flex flex-col items-center justify-items-center gap-6 px-5 pt-10.5 pb-12.5 bg-accent rounded-b-[30px] -mt-[1px]">
         <h1
           style={{ fontSize: textSize }}
           className="font-bold leading-none text-white "
@@ -16,6 +18,16 @@ export default function Hero() {
           Choosing a pet for your home is a choice that is meant to enrich your
           life with immeasurable joy and tenderness.
         </p>
+      </div>
+      <div className="relative w-full h-[402px] rounded-[30px] overflow-hidden">
+        <Image
+          src={heroImg}
+          alt="A girl gently kissing her Labrador"
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover object-[44%_50%] scale-107"
+        />
       </div>
     </section>
   );
