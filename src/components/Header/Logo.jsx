@@ -9,7 +9,7 @@ export default function Logo({
   return (
     <Link
       href="/"
-      className={`flex items-baseline text-xl leading-none font-bold ${textColor}`}
+      className={`flex items-baseline py-[10px] text-xl leading-none font-bold ${textColor}`}
       aria-label="Pet love"
       {...props}
     >
