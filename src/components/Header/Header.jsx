@@ -22,8 +22,10 @@ export default function Header() {
 
   return (
     <header
-      className={`relative py-4.5 px-5 bg-accent rounded-t-[30px] ${
-        isHome ? 'mt-2.5' : ''
+      className={`relative ${
+        isHome
+          ? 'mt-2.5 rounded-t-[30px] bg-accent pt-4.5 pb-4.5 px-5'
+          : 'pt-6 pb-4'
       }`}
     >
       <div className="flex items-center justify-between min-h-10">
