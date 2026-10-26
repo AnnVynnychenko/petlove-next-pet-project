@@ -13,6 +13,7 @@
   --color-white: #ffffff;
   --color-bgPrimary: #f9f9f9;
   --color-lightAccent: #fff4df;
+  --color-hoverBtn: #fbe7c1;
   --color-female: #f43f5e;
   --color-male: #54adff;
   --color-rejected: #ef2447;
@@ -72,10 +73,6 @@ a {
 
 button {
   display: block;
-  padding: 0;
-  border: none;
-  font: inherit;
-  background-color: transparent;
   cursor: pointer;
 }
 
@@ -83,17 +80,8 @@ address {
   font-style: normal;
 }
 
-figure {
-  margin: 0;
-}
-
 input,
 select,
 textarea {
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-  background-color: transparent;
-  border: none;
   outline: none;
 }
