@@ -12,5 +12,7 @@ export const useFindPath = () => {
     isNews: pathname.startsWith('/news'),
     isNotices: pathname.startsWith('/notices'),
     isProfile: pathname.startsWith('/profile'),
+    isLogin: pathname.startsWith('/login'),
+    isRegister: pathname.startsWith('/register'),
   };
 };
