@@ -1,20 +1,20 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import Logo from '@/components/Header/Logo';
-import BurgerMenuIcon from '@/components/Header/BurgerMenu/BurgerMenuIcon';
+import BurgerMenuBtn from '@/components/Header/BurgerMenu/BurgerMenuBtn';
 import UserAvatar from '@/components/Header/UserAvatar';
+import { useToggle } from '@/hooks/useToggle';
+import MainNav from '@/components/Header/MainNav/MainNav';
+import BurgerMenu from '@/components/Header/BurgerMenu/BurgerMenu';
+import { useFindPath } from '@/hooks/useFindPath';
 
 export default function Header() {
-  const pathname = usePathname();
+  const { isHome } = useFindPath();
+
+  const { isOpen: isMenuOpen, toggle: toggleMenu } = useToggle(false);
 
   //поки немає реестрації
   const isLoggedIn = true;
-
-  const isHome =
-    pathname === '/' ||
-    pathname === '/petlove-next-pet-project' ||
-    pathname === '/petlove-next-pet-project/';
 
   const burgerClasses = isHome
     ? 'text-white hover:text-lightAccent focus-visible:text-lightAccent'
@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <header
-      className={`py-4.5 px-5 bg-accent rounded-t-[30px] ${
+      className={`relative py-4.5 px-5 bg-accent rounded-t-[30px] ${
         isHome ? 'mt-2.5' : ''
       }`}
     >
@@ -31,11 +31,19 @@ export default function Header() {
           textColor={isHome ? 'text-white' : undefined}
           heartStyles={isHome ? 'text-white' : 'text-accent'}
         />
-        <div className="flex flex-raw gap-3">
+        <div className="hidden xl:block">
+          <MainNav />
+        </div>
+        <div className="flex gap-3">
           {isLoggedIn && <UserAvatar />}
-          <BurgerMenuIcon burgerClasses={burgerClasses} />
+          <BurgerMenuBtn
+            onClick={toggleMenu}
+            isMenuOpen={isMenuOpen}
+            burgerClasses={burgerClasses}
+          />
         </div>
       </div>
+      {isMenuOpen && <BurgerMenu onClose={toggleMenu} />}
     </header>
   );
 }
