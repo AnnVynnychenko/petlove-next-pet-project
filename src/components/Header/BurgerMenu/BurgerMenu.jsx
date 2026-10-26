@@ -12,7 +12,7 @@ export default function BurgerMenu({ onClose }) {
         className="fixed inset-0 bg-transparent z-40 xl:hidden"
         aria-hidden="true"
       ></div>
-      <div className="fixed top-0 right-0 flex flex-col justify-between gap-4 w-[58vw] h-screen px-5 pt-59 pb-10 bg-white z-50 xl:hidden">
+      <div className="fixed top-0 right-0 flex flex-col justify-between gap-4 w-[58vw] h-screen px-5 pt-59 pb-10 bg-white z-50 overflow-y-auto xl:hidden">
         <button
           type="button"
           onClick={onClose}
