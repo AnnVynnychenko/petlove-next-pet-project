@@ -14,7 +14,7 @@ export default function Button({
     primary:
       'text-white bg-accent border border-accent hover:bg-lightAccent hover:text-accent hover:border-lightAccent focus-visible:bg-lightAccent focus-visible:text-accent',
     secondary:
-      'text-accent bg-lightAccent border border-lightAccent hover:bg-hoverBtn focus-visible:bg-hoverBtn',
+      'text-accent bg-lightAccent border border-lightAccent hover:bg-hoverBtn hover:border-hoverBtn focus-visible:bg-hoverBtn focus-visible:border-hoverBtn',
   };
 
   return (
