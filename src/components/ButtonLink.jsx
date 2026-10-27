@@ -1,10 +1,12 @@
+import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
-export default function Button({
+export default function ButtonLink({
   type = 'button',
   variant = 'accent',
   children,
   className = '',
+  href,
   ...props
 }) {
   const baseStyles =
@@ -17,14 +19,20 @@ export default function Button({
       'text-accent bg-lightAccent border border-lightAccent hover:bg-hoverBtn hover:border-hoverBtn focus-visible:bg-hoverBtn focus-visible:border-hoverBtn',
   };
 
+  const combinedStyles = twMerge(
+    `${baseStyles} ${variants[variant] || ''} ${className}`
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={combinedStyles} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <button
-      type={type}
-      className={twMerge(
-        `${baseStyles} ${variants[variant] || ''} ${className}`
-      )}
-      {...props}
-    >
+    <button type={type} className={combinedStyles} {...props}>
       {children}
     </button>
   );

@@ -1,10 +1,10 @@
 'use client';
 
-import Button from '@/components/Button';
 import MainNav from '@/components/Header/MainNav/MainNav';
 import Icon from '@/components/Icon';
 import { useScrollLock } from '@/hooks/useScrollLock';
 import { useFindPath } from '@/hooks/useFindPath';
+import ButtonLink from '@/components/ButtonLink';
 
 export default function BurgerMenu({ onClose }) {
   useScrollLock();
@@ -31,15 +31,22 @@ export default function BurgerMenu({ onClose }) {
         </button>
         <MainNav className="mx-auto" onClose={onClose} />
         <div className="mt-70 shrink-0">
-          <Button
+          <ButtonLink
+            href="/login"
+            onClick={onClose}
             variant="primary"
             className={`w-full mb-2 uppercase font-bold ${!isHome && 'border-white/50'}`}
           >
             Log in
-          </Button>
-          <Button variant="secondary" className="w-full uppercase font-bold">
+          </ButtonLink>
+          <ButtonLink
+            href="/register"
+            variant="secondary"
+            onClick={onClose}
+            className="w-full uppercase font-bold"
+          >
             Registration
-          </Button>
+          </ButtonLink>
         </div>
       </div>
     </>
