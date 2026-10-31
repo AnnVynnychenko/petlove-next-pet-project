@@ -1,3 +1,9 @@
+import PetBlock from '@/components/Auth/PetBlock';
+
 export default function RegistrationPage() {
-  return <></>;
+  return (
+    <>
+      <PetBlock type="register" />
+    </>
+  );
 }

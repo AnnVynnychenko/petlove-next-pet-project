@@ -1,3 +1,9 @@
+import PetBlock from '@/components/Auth/PetBlock';
+
 export default function LoginPage() {
-  return <></>;
+  return (
+    <>
+      <PetBlock type="login" />
+    </>
+  );
 }
