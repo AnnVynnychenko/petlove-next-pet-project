@@ -13,7 +13,7 @@ export default function PetBlock({ type = 'login', ...props }) {
   const imgPositionClass = positionStyles[type] || positionStyles.login;
   return (
     <div
-      className="relative w-full h-70 bg-accent rounded-[30px] overflow-hidden"
+      className="relative w-full h-70 bg-accent rounded-30 overflow-hidden"
       {...props}
     >
       <Icon

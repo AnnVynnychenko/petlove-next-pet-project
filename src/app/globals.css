@@ -19,6 +19,10 @@
   --color-rejected: #ef2447;
   --color-approve: #08aa83;
 
+  --radius-30: 30px;
+
+  --tracking-tight-custom: -0.03em;
+
   --ease-custom: cubic-bezier(0.4, 0, 0.2, 1);
   --duration-custom: 300ms;
 }

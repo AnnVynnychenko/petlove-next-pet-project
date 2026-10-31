@@ -18,7 +18,7 @@ export default function LinkMainNav({
 
   return (
     <li
-      className={`w-full text-center text-[14px] leading-[1.2] tracking-[-0.03em] border rounded-[30px] ${mainNavLinkStyles} ${className}`}
+      className={`w-full text-center text-[14px] leading-[1.2] tracking-tight-custom border rounded-30 ${mainNavLinkStyles} ${className}`}
       {...props}
     >
       <Link href={href} onClick={onClose} className="block w-full py-[15px]">

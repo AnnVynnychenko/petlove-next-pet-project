@@ -19,7 +19,7 @@ export default function Hero() {
           life with immeasurable joy and tenderness.
         </p>
       </div>
-      <div className="relative w-full h-[402px] rounded-[30px] overflow-hidden">
+      <div className="relative w-full h-[402px] rounded-30 overflow-hidden">
         <Image
           src={heroImg}
           alt="A girl gently kissing her Labrador"
