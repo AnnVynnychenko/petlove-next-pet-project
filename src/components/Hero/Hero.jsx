@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="flex flex-col items-center justify-items-center gap-6 px-5 pt-10.5 pb-12.5 bg-accent rounded-b-[30px] -mt-[1px]">
         <h1
           style={{ fontSize: textSize }}
-          className="font-bold leading-none text-white "
+          className="font-bold leading-none text-white"
         >
           Take good <span className="text-white/40">care</span> of your small
           pets
