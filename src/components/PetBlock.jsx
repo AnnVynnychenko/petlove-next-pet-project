@@ -11,7 +11,6 @@ export default function PetBlock({ type = 'login', ...props }) {
   const { src, alt, className } = authConfig[type] || authConfig.login;
 
   const imgPositionClass = positionStyles[type] || positionStyles.login;
-  console.log('🚀 ~ imgPositionClass:', imgPositionClass);
   return (
     <div
       className="relative w-full h-70 bg-accent rounded-[30px] overflow-hidden"

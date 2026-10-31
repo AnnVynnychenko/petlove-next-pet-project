@@ -1,4 +1,4 @@
-import PetBlock from '@/components/Auth/PetBlock';
+import PetBlock from '@/components/PetBlock';
 
 export default function RegistrationPage() {
   return (
