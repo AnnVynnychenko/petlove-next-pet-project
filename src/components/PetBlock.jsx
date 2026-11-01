@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Icon from '@/components/Icon';
-import { authConfig } from '@/constants/authConfig';
+import { petBlockConfig } from '@/constants/petBlockConfig';
 
 const positionStyles = {
   login: '-top-17 left-4 scale-68',
@@ -8,7 +8,7 @@ const positionStyles = {
 };
 
 export default function PetBlock({ type = 'login', ...props }) {
-  const { src, alt, className } = authConfig[type] || authConfig.login;
+  const { src, alt } = petBlockConfig[type] || petBlockConfig.login;
 
   const imgPositionClass = positionStyles[type] || positionStyles.login;
   return (
