@@ -1,6 +1,8 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { PulseLoader } from 'react-spinners';
 import Input from '@/components/Auth/Input';
 import ButtonLink from '@/components/ButtonLink';
 import { useToggle } from '@/hooks/useToggle';
@@ -21,7 +23,13 @@ export default function RegistrationForm() {
     defaultValues: { name: '', email: '', password: '', confirmPassword: '' },
   });
 
-  function submitData() {}
+  async function submitData(data) {
+    try {
+      reset();
+    } catch (err) {
+      toast.error(err.message || 'Registration failed');
+    }
+  }
 
   return (
     <form
@@ -78,8 +86,13 @@ export default function RegistrationForm() {
         type="submit"
         variant="primary"
         className="mt-3.5 uppercase font-bold"
+        disabled={isSubmitting}
       >
-        registration
+        {isSubmitting ? (
+          <PulseLoader color="var(--color-white)" size={8} />
+        ) : (
+          'registration'
+        )}
       </ButtonLink>
     </form>
   );
