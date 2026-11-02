@@ -3,14 +3,14 @@ import { twMerge } from 'tailwind-merge';
 
 export default function ButtonLink({
   type = 'button',
-  variant = 'accent',
+  variant = 'primary',
   children,
   className = '',
   href,
   ...props
 }) {
   const baseStyles =
-    'flex items-center justify-center p-3 rounded-30 text-[14px] leading-[1.2] tracking-tight-custom transition-colors duration-custom ease-custom';
+    'flex items-center justify-center p-3 rounded-30 text-sm leading-[1.2] tracking-tight-custom transition-colors duration-custom ease-custom';
 
   const variants = {
     primary:
