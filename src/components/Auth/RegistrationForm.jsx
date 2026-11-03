@@ -3,16 +3,20 @@
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { PulseLoader } from 'react-spinners';
+import { useRouter } from 'next/navigation';
 import Input from '@/components/Auth/Input';
 import ButtonLink from '@/components/ButtonLink';
 import { useToggle } from '@/hooks/useToggle';
 import EyeIconBtn from '@/components/Auth/EyeIconBtn';
+import { registerUserAction } from '@/app/actions/auth';
 
 export default function RegistrationForm() {
   const { isOpen: showPassword, toggle: togglePasswordVisibility } =
     useToggle(false);
   const { isOpen: showConfirmPassword, toggle: toggleConfirmPassword } =
     useToggle(false);
+
+  const router = useRouter();
 
   const {
     register,
@@ -25,9 +29,24 @@ export default function RegistrationForm() {
 
   async function submitData(data) {
     try {
-      reset();
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('password', data.password);
+
+      const result = await registerUserAction(formData);
+      console.log('🚀 ~ result:', result);
+
+      if (result.success && result.data.token) {
+        toast.success('Registration successful!');
+        router.push('/profile');
+        reset();
+      } else {
+        toast.error(result.error || 'Something went wrong');
+      }
     } catch (err) {
-      toast.error(err.message || 'Registration failed');
+      toast.error(err.message || 'Network error, try again later');
+      console.error(err.message);
     }
   }
 

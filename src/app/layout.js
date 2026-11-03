@@ -1,4 +1,5 @@
 import { Manrope } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 import './globals.css';
 import Header from '@/components/Header/Header';
 import { clampBuilder } from '@/helpers/clampBuilder';
@@ -26,6 +27,13 @@ export default function RootLayout({ children }) {
           <Header />
           <main className="flex-1">{children}</main>
         </div>
+        <Toaster
+          position="top-left"
+          toastOptions={{
+            duration: 2000,
+            removeDelay: 1000,
+          }}
+        />
       </body>
     </html>
   );
