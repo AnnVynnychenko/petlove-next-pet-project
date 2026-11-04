@@ -1,31 +1,42 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { PulseLoader } from 'react-spinners';
 import { useRouter } from 'next/navigation';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '@/components/Auth/Input';
 import ButtonLink from '@/components/ButtonLink';
-import { useToggle } from '@/hooks/useToggle';
-import EyeIconBtn from '@/components/Auth/EyeIconBtn';
 import { registerUserAction } from '@/app/actions/auth';
+import { registrationYupSchema } from '@/yup/registrationYupSchema';
 
 export default function RegistrationForm() {
-  const { isOpen: showPassword, toggle: togglePasswordVisibility } =
-    useToggle(false);
-  const { isOpen: showConfirmPassword, toggle: toggleConfirmPassword } =
-    useToggle(false);
-
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    control,
     reset,
   } = useForm({
     defaultValues: { name: '', email: '', password: '', confirmPassword: '' },
+    resolver: yupResolver(registrationYupSchema),
+    mode: 'onChange',
   });
+
+  const passwordValue =
+    useWatch({
+      control,
+      name: 'password',
+    }) || '';
+
+  const hasMinLength = passwordValue.length >= 7;
+  const hasUpperCase = /[A-Z]/.test(passwordValue);
+  const hasLowerCase = /[a-z]/.test(passwordValue);
+  const hasNumber = /\d/.test(passwordValue);
+
+  const isSecure = hasMinLength && hasUpperCase && hasLowerCase && hasNumber;
 
   async function submitData(data) {
     try {
@@ -35,7 +46,6 @@ export default function RegistrationForm() {
       formData.append('password', data.password);
 
       const result = await registerUserAction(formData);
-      console.log('🚀 ~ result:', result);
 
       if (result.success && result.data.token) {
         toast.success('Registration successful!');
@@ -65,42 +75,28 @@ export default function RegistrationForm() {
       <Input
         register={register}
         name="email"
+        type="email"
         placeholder="Email"
         autoComplete="email"
         error={errors.email}
       />
-      <div className="relative">
-        <Input
-          register={register}
-          name="password"
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Password"
-          autoComplete="new-password"
-          error={errors.password}
-        />
-        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-          <EyeIconBtn
-            showPassword={showPassword}
-            togglePasswordVisibility={togglePasswordVisibility}
-          />
-        </div>
-      </div>
-      <div className="relative">
-        <Input
-          register={register}
-          name="confirmPassword"
-          type={showConfirmPassword ? 'text' : 'password'}
-          placeholder="Confirm password"
-          autoComplete="new-password"
-          error={errors.confirmPassword}
-        />
-        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-          <EyeIconBtn
-            showPassword={showConfirmPassword}
-            togglePasswordVisibility={toggleConfirmPassword}
-          />
-        </div>
-      </div>
+      <Input
+        register={register}
+        name="password"
+        placeholder="Password"
+        autoComplete="new-password"
+        error={errors.password}
+        password
+        isSecurePassword={isSecure}
+      />
+      <Input
+        register={register}
+        name="confirmPassword"
+        placeholder="Confirm password"
+        autoComplete="new-password"
+        error={errors.confirmPassword}
+        password
+      />
       <ButtonLink
         type="submit"
         variant="primary"
