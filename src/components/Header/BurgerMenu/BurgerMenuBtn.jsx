@@ -17,7 +17,7 @@ export default function BurgerMenuBtn({
       className={`${burgerClasses} transition-colors duration-custom ease-custom xl:hidden`}
       {...props}
     >
-      <Icon name="burger-menu" className="w-8 h-8 xl:hidden" />
+      <Icon name="burger-menu" className="size-8 xl:hidden" />
     </button>
   );
 }
