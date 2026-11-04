@@ -20,14 +20,12 @@ export default function Header() {
     ? 'text-white hover:text-lightAccent focus-visible:text-lightAccent'
     : 'text-textMain hover:text-accent focus-visible:text-accent';
 
+  const headerClasses = isHome
+    ? 'mt-2.5 rounded-t-[30px] bg-accent pt-4.5 pb-4.5 px-5'
+    : 'pt-6 pb-4';
+
   return (
-    <header
-      className={`relative ${
-        isHome
-          ? 'mt-2.5 rounded-t-[30px] bg-accent pt-4.5 pb-4.5 px-5'
-          : 'pt-6 pb-4'
-      }`}
-    >
+    <header className={`relative ${headerClasses}`}>
       <div className="flex items-center justify-between min-h-10">
         <Logo
           textColor={isHome ? 'text-white' : undefined}

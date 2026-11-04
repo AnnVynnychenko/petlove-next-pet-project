@@ -11,6 +11,10 @@ export default function BurgerMenu({ onClose }) {
 
   const { isHome } = useFindPath();
 
+  const burgerMenuBgClasses = isHome ? 'bg-white' : 'bg-accent';
+  const burgerCloseBtnColor = !isHome && 'text-white';
+  const bergerNavBorder = !isHome && 'border-white/50';
+
   return (
     <>
       <div
@@ -19,15 +23,15 @@ export default function BurgerMenu({ onClose }) {
         aria-hidden="true"
       ></div>
       <div
-        className={`fixed top-0 right-0 flex flex-col w-[58vw] h-[100dvh] px-5 pt-59 pb-10 ${isHome ? 'bg-white' : 'bg-accent'} z-50 overflow-y-auto xl:hidden`}
+        className={`fixed top-0 right-0 flex flex-col w-[58vw] h-[100dvh] px-5 pt-59 pb-10 ${burgerMenuBgClasses} z-50 overflow-y-auto xl:hidden`}
       >
         <button
           type="button"
           onClick={onClose}
-          className={`fixed top-9 right-7 w-4 h-4 ${!isHome && 'text-white'}`}
+          className={`fixed top-9 right-7 size-4 ${burgerCloseBtnColor}`}
           aria-label="Close menu"
         >
-          <Icon name="close" className="w-4 h-4" />
+          <Icon name="close" className="size-4" />
         </button>
         <MainNav className="mx-auto" onClose={onClose} />
         <div className="mt-70 shrink-0">
@@ -35,7 +39,7 @@ export default function BurgerMenu({ onClose }) {
             href="/login"
             onClick={onClose}
             variant="primary"
-            className={`w-full mb-2 uppercase font-bold ${!isHome && 'border-white/50'}`}
+            className={`w-full mb-2 uppercase font-bold ${bergerNavBorder}`}
           >
             Log in
           </ButtonLink>
