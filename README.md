@@ -12,13 +12,13 @@ Router, Server Actions), Tailwind CSS, React Hook Form, and Yup validation.
 
 ```bash
 # 1. Clone the repository
-git clone [https://github.com/AnnVynnychenko/petlove-next-pet-project.git](https://github.com/AnnVynnychenko/petlove-next-pet-project.git)
+git clone https://github.com/AnnVynnychenko/petlove-next-pet-project.git
 
 # 2. Install dependencies
 npm install
 
 # 3. Create .env.local in the root directory and add:
-# API_URL=[https://petlove.b.goit.study/api](https://petlove.b.goit.study/api)
+# API_URL=https://petlove.b.goit.study/api
 
 # 4. Run the development server
 npm run dev
