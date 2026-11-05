@@ -11,9 +11,6 @@ const nextConfig = {
       },
     },
   },
-  output: isProd ? 'export' : undefined,
-  basePath: isProd ? '/petlove-next-pet-project' : '',
-  assetPrefix: isProd ? '/petlove-next-pet-project/' : '',
   images: {
     unoptimized: true,
   },
