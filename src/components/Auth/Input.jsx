@@ -8,7 +8,7 @@ export default function Input({
   register,
   name = '',
   error = null,
-  password = false,
+  isPassword = false,
   type = 'text',
   isSecurePassword = false,
   className = '',
@@ -17,16 +17,16 @@ export default function Input({
   const { isOpen: showPassword, toggle: togglePasswordVisibility } =
     useToggle(false);
 
-  const inputType = password
-    ? showPassword && password
+  const inputType = isPassword
+    ? showPassword && isPassword
       ? 'text'
       : 'password'
     : type;
 
   const paddingRightClass =
-    (error && password) || isSecurePassword
+    (error && isPassword) || isSecurePassword
       ? 'pr-15'
-      : error || password
+      : error || isPassword
         ? 'pr-9'
         : 'pr-3';
 
@@ -37,7 +37,7 @@ export default function Input({
       : 'border-textMain/15 hover:border-accent focus-visible:border-accent';
 
   const iconErrorPosition =
-    password && error ? 'right-9.5' : error && 'right-4';
+    isPassword && error ? 'right-9.5' : error && 'right-4';
 
   const errorId = `${name}-error`;
   const secureId = `${name}-secure-status`;
@@ -54,7 +54,7 @@ export default function Input({
           type={inputType}
           {...props}
         />
-        {password && (
+        {isPassword && (
           <div className="absolute right-3 top-1/2 -translate-y-1/2">
             <EyeIconBtn
               showPassword={showPassword}

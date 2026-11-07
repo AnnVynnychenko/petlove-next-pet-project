@@ -7,8 +7,11 @@ import { useRouter } from 'next/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '@/components/Auth/Input';
 import ButtonLink from '@/components/ButtonLink';
-import { registerUserAction } from '@/app/actions/auth';
+import { registerUserAction } from '@/actions/auth';
 import { registrationYupSchema } from '@/yup/registrationYupSchema';
+import { isPasswordSecure } from '@/helpers/checkSecurityPassword';
+import { buildFormData } from '@/helpers/buildFormData';
+import { REGISTRATION_FIELDS } from '@/constants/authFields';
 
 export default function RegistrationForm() {
   const router = useRouter();
@@ -31,20 +34,15 @@ export default function RegistrationForm() {
       name: 'password',
     }) || '';
 
-  const hasMinLength = passwordValue.length >= 7;
-  const hasUpperCase = /[A-Z]/.test(passwordValue);
-  const hasLowerCase = /[a-z]/.test(passwordValue);
-  const hasNumber = /\d/.test(passwordValue);
-
-  const isSecure = hasMinLength && hasUpperCase && hasLowerCase && hasNumber;
+  const isSecure = isPasswordSecure(passwordValue);
 
   async function submitData(data) {
     try {
-      const formData = new FormData();
-      formData.append('name', data.name);
-      formData.append('email', data.email);
-      formData.append('password', data.password);
-
+      const formData = buildFormData({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
       const result = await registerUserAction(formData);
 
       if (result.success && result.data.token) {
@@ -65,38 +63,29 @@ export default function RegistrationForm() {
       className="flex flex-col w-full gap-2.5 mt-5"
       onSubmit={handleSubmit(submitData)}
     >
-      <Input
-        register={register}
-        name="name"
-        placeholder="Name"
-        autoComplete="name"
-        error={errors.name}
-      />
-      <Input
-        register={register}
-        name="email"
-        type="email"
-        placeholder="Email"
-        autoComplete="email"
-        error={errors.email}
-      />
-      <Input
-        register={register}
-        name="password"
-        placeholder="Password"
-        autoComplete="new-password"
-        error={errors.password}
-        password
-        isSecurePassword={isSecure}
-      />
-      <Input
-        register={register}
-        name="confirmPassword"
-        placeholder="Confirm password"
-        autoComplete="new-password"
-        error={errors.confirmPassword}
-        password
-      />
+      {REGISTRATION_FIELDS.map(field => {
+        const {
+          name = '',
+          placeholder = '',
+          autoComplete = '',
+          type = 'text',
+          isPassword = false,
+        } = field;
+        return (
+          <Input
+            key={name}
+            register={register}
+            name={name}
+            placeholder={placeholder}
+            autoComplete={autoComplete}
+            type={type}
+            isPassword={isPassword}
+            isSecurePassword={name === 'password' ? isSecure : undefined}
+            error={errors[name]}
+          />
+        );
+      })}
+
       <ButtonLink
         type="submit"
         variant="primary"
