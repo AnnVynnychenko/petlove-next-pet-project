@@ -28,3 +28,20 @@ export const REGISTRATION_FIELDS = [
     isPassword: true,
   },
 ];
+
+export const LOGIN_FIELDS = [
+  {
+    name: 'email',
+    placeholder: 'Email',
+    autoComplete: 'email',
+    type: 'email',
+    isPassword: false,
+  },
+  {
+    name: 'password',
+    placeholder: 'Password',
+    autoComplete: 'current-password',
+    type: 'password',
+    isPassword: true,
+  },
+];
