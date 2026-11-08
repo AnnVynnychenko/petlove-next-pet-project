@@ -2,16 +2,12 @@
 
 const API_URL = process.env.API_URL;
 
-export async function registerUserAction(formData) {
-  const name = formData.get('name');
-  const email = formData.get('email');
-  const password = formData.get('password');
-
+async function sendAuthRequest(endpoint, payload) {
   try {
-    const response = await fetch(`${API_URL}/users/signup`, {
+    const response = await fetch(`${API_URL}${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify(payload),
     });
 
     const data = await response.json();
@@ -19,7 +15,7 @@ export async function registerUserAction(formData) {
     if (!response.ok) {
       return {
         success: false,
-        error: data.message || 'registration failed',
+        error: data.message || 'Operation failed',
       };
     }
 
@@ -28,4 +24,27 @@ export async function registerUserAction(formData) {
     console.error(err.message);
     return { success: false, error: 'server connection failed' };
   }
+}
+
+export async function registerUserAction(formData) {
+  const payload = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+  };
+
+  const endpoint = '/users/signup';
+
+  return sendAuthRequest(endpoint, payload);
+}
+
+export async function loginUserAction(formData) {
+  const payload = {
+    email: formData.get('email'),
+    password: formData.get('password'),
+  };
+
+  const endpoint = '/users/signin';
+
+  return sendAuthRequest(endpoint, payload);
 }
