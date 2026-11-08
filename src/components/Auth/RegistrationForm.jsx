@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { PulseLoader } from 'react-spinners';
 import { useRouter } from 'next/navigation';
@@ -9,9 +9,9 @@ import Input from '@/components/Auth/Input';
 import ButtonLink from '@/components/ButtonLink';
 import { registerUserAction } from '@/actions/auth';
 import { registrationYupSchema } from '@/yup/registrationYupSchema';
-import { isPasswordSecure } from '@/helpers/checkSecurityPassword';
 import { buildFormData } from '@/helpers/buildFormData';
 import { REGISTRATION_FIELDS } from '@/constants/authFields';
+import { usePasswordValidation } from '@/hooks/usePasswordValidation';
 
 export default function RegistrationForm() {
   const router = useRouter();
@@ -25,16 +25,10 @@ export default function RegistrationForm() {
   } = useForm({
     defaultValues: { name: '', email: '', password: '', confirmPassword: '' },
     resolver: yupResolver(registrationYupSchema),
-    mode: 'onChange',
+    mode: 'onBlur',
   });
 
-  const passwordValue =
-    useWatch({
-      control,
-      name: 'password',
-    }) || '';
-
-  const isSecure = isPasswordSecure(passwordValue);
+  const { isSecure } = usePasswordValidation(control, trigger);
 
   async function submitData(data) {
     try {

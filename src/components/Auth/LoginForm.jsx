@@ -1,9 +1,8 @@
 'use client';
 
-import { isPasswordSecure } from '@/helpers/checkSecurityPassword';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { PulseLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
 import Input from '@/components/Auth/Input';
@@ -12,6 +11,7 @@ import { LOGIN_FIELDS } from '@/constants/authFields';
 import { buildFormData } from '@/helpers/buildFormData';
 import { loginUserAction } from '@/actions/auth';
 import { loginYupSchema } from '@/yup/loginYupSchema';
+import { usePasswordValidation } from '@/hooks/usePasswordValidation';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -21,6 +21,7 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
+    trigger,
     reset,
   } = useForm({
     defaultValues: { email: '', password: '' },
@@ -28,9 +29,7 @@ export default function LoginForm() {
     mode: 'onBlur',
   });
 
-  const passwordValue = useWatch({ control, name: 'password' } || '');
-
-  const isSecure = isPasswordSecure(passwordValue);
+  const { isSecure } = usePasswordValidation(control, trigger);
 
   async function submitData(data) {
     try {
@@ -39,7 +38,6 @@ export default function LoginForm() {
         password: data.password,
       });
       const result = await loginUserAction(formData);
-      console.log('🚀 ~ result:', result);
 
       if (result.success && result.data.token) {
         toast.success('Login successful!');
