@@ -12,6 +12,7 @@ import { registrationYupSchema } from '@/yup/registrationYupSchema';
 import { buildFormData } from '@/helpers/buildFormData';
 import { REGISTRATION_FIELDS } from '@/constants/authFields';
 import { usePasswordValidation } from '@/hooks/usePasswordValidation';
+import { handleAuthResponse } from '@/helpers/handleAuthResponse';
 
 export default function RegistrationForm() {
   const router = useRouter();
@@ -21,6 +22,7 @@ export default function RegistrationForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
+    trigger,
     reset,
   } = useForm({
     defaultValues: { name: '', email: '', password: '', confirmPassword: '' },
@@ -39,13 +41,10 @@ export default function RegistrationForm() {
       });
       const result = await registerUserAction(formData);
 
-      if (result.success && result.data.token) {
-        toast.success('Registration successful!');
-        router.push('/profile');
-        reset();
-      } else {
-        toast.error(result.error || 'Something went wrong');
-      }
+      handleAuthResponse(result, router, reset, {
+        successMessage: 'Registration successful!',
+        redirectTo: '/profile',
+      });
     } catch (err) {
       toast.error(err.message || 'Network error, try again later');
       console.error(err.message);

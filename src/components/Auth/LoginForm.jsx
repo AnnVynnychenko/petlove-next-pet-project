@@ -12,6 +12,7 @@ import { buildFormData } from '@/helpers/buildFormData';
 import { loginUserAction } from '@/actions/auth';
 import { loginYupSchema } from '@/yup/loginYupSchema';
 import { usePasswordValidation } from '@/hooks/usePasswordValidation';
+import { handleAuthResponse } from '@/helpers/handleAuthResponse';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -39,13 +40,10 @@ export default function LoginForm() {
       });
       const result = await loginUserAction(formData);
 
-      if (result.success && result.data.token) {
-        toast.success('Login successful!');
-        router.push('/profile');
-        reset();
-      } else {
-        toast.error(result.error || 'Something went wrong');
-      }
+      handleAuthResponse(result, router, reset, {
+        successMessage: 'Login successful!',
+        redirectTo: '/profile',
+      });
     } catch (err) {
       toast.error(err.message || 'Network error, try again later');
       console.error(err.message);
