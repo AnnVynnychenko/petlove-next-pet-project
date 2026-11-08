@@ -17,8 +17,8 @@ export default function AuthLayout({ children }) {
   return (
     <div>
       <PetBlock key={type} type={type} />
-      <div className="mt-[10px] mb-5 py-[27px] px-5 bg-white rounded-30">
-        {children}
+      <div className="flex flex-col items-center justify-center min-h-105.5 mt-[10px] mb-5 p-5 bg-white rounded-30">
+        <div>{children}</div>
       </div>
     </div>
   );
