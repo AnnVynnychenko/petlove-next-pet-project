@@ -24,7 +24,7 @@ export default function PetBlock({ type = 'login', ...props }) {
       <Image
         src={src}
         alt={alt}
-        priority
+        priority={true}
         className={`absolute object-cover ${imgPositionClass}`}
       />
     </div>

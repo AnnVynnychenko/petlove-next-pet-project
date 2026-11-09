@@ -25,7 +25,8 @@ export default function Hero() {
           alt="A girl gently kissing her Labrador"
           fill
           sizes="100vw"
-          priority
+          priority={true}
+          placeholder="blur"
           className="object-cover object-[44%_50%] scale-107"
         />
       </div>
