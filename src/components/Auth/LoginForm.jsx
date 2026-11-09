@@ -13,9 +13,12 @@ import { loginUserAction } from '@/actions/auth';
 import { loginYupSchema } from '@/yup/loginYupSchema';
 import { usePasswordValidation } from '@/hooks/usePasswordValidation';
 import { handleAuthResponse } from '@/helpers/handleAuthResponse';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export default function LoginForm() {
   const router = useRouter();
+
+  const setAuth = useAuthStore(state => state.setAuth);
 
   const {
     register,
@@ -40,7 +43,7 @@ export default function LoginForm() {
       });
       const result = await loginUserAction(formData);
 
-      handleAuthResponse(result, router, reset, {
+      handleAuthResponse(result, router, reset, setAuth, {
         successMessage: 'Login successful!',
         redirectTo: '/profile',
       });

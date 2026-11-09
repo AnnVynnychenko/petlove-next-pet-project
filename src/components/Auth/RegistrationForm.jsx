@@ -13,9 +13,12 @@ import { buildFormData } from '@/helpers/buildFormData';
 import { REGISTRATION_FIELDS } from '@/constants/authFields';
 import { usePasswordValidation } from '@/hooks/usePasswordValidation';
 import { handleAuthResponse } from '@/helpers/handleAuthResponse';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export default function RegistrationForm() {
   const router = useRouter();
+
+  const setAuth = useAuthStore(state => state.setAuth);
 
   const {
     register,
@@ -41,7 +44,7 @@ export default function RegistrationForm() {
       });
       const result = await registerUserAction(formData);
 
-      handleAuthResponse(result, router, reset, {
+      handleAuthResponse(result, router, reset, setAuth, {
         successMessage: 'Registration successful!',
         redirectTo: '/profile',
       });

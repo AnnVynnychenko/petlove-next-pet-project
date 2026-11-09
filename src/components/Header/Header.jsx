@@ -7,14 +7,14 @@ import { useToggle } from '@/hooks/useToggle';
 import MainNav from '@/components/Header/MainNav/MainNav';
 import BurgerMenu from '@/components/Header/BurgerMenu/BurgerMenu';
 import { useFindPath } from '@/hooks/useFindPath';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export default function Header() {
   const { isHome } = useFindPath();
 
   const { isOpen: isMenuOpen, toggle: toggleMenu } = useToggle(false);
 
-  //поки немає реестрації
-  const isLoggedIn = true;
+  const isLoggedIn = useAuthStore(state => state.isLoggedIn);
 
   const burgerClasses = isHome
     ? 'text-white hover:text-lightAccent focus-visible:text-lightAccent'
