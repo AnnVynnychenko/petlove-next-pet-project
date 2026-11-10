@@ -45,7 +45,7 @@ export default function Input({
   const describedBy = error ? errorId : isSecurePassword ? secureId : undefined;
 
   return (
-    <div className={`w-full ${className}`}>
+    <div className="w-full">
       <div className="relative">
         <input
           {...register(name)}
@@ -54,7 +54,8 @@ export default function Input({
           className={twMerge(
             'w-full py-3 pl-3 text-textMain text-sm tracking-tight-custom leading-[1.28] placeholder:text-textMain/50 border rounded-30',
             paddingRightClass,
-            borderClasses
+            borderClasses,
+            className
           )}
           type={inputType}
           {...props}
