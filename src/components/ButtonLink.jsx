@@ -10,7 +10,7 @@ export default function ButtonLink({
   ...props
 }) {
   const baseStyles =
-    'flex items-center justify-center p-3 rounded-30 text-sm leading-[1.2] tracking-tight-custom transition-colors duration-custom ease-custom';
+    'flex items-center justify-center p-3 rounded-30 text-sm leading-[1.2] tracking-tight-custom transition-colors duration-custom ease-custom outline-none';
 
   const variants = {
     primary:
