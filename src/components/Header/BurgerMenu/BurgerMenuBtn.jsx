@@ -1,6 +1,7 @@
 'use client';
 
 import Icon from '@/components/Icon';
+import { twMerge } from 'tailwind-merge';
 
 export default function BurgerMenuBtn({
   isMenuOpen = false,
@@ -14,7 +15,10 @@ export default function BurgerMenuBtn({
       onClick={onClick}
       aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
       aria-expanded={isMenuOpen}
-      className={`${burgerClasses} transition-colors duration-custom ease-custom xl:hidden`}
+      className={twMerge(
+        'transition-colors duration-custom ease-custom xl:hidden',
+        burgerClasses
+      )}
       {...props}
     >
       <Icon name="burger-menu" className="size-8 xl:hidden" />

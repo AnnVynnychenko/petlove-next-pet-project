@@ -3,6 +3,7 @@
 import { useToggle } from '@/hooks/useToggle';
 import EyeIconBtn from '@/components/Auth/EyeIconBtn';
 import Icon from '@/components/Icon';
+import { twMerge } from 'tailwind-merge';
 
 export default function Input({
   register,
@@ -50,7 +51,11 @@ export default function Input({
           {...register(name)}
           aria-invalid={Boolean(error)}
           aria-describedby={describedBy}
-          className={`w-full py-3 pl-3 ${paddingRightClass} text-textMain text-sm tracking-tight-custom leading-[1.28] placeholder:text-textMain/50 border rounded-30 ${borderClasses}`}
+          className={twMerge(
+            'w-full py-3 pl-3 text-textMain text-sm tracking-tight-custom leading-[1.28] placeholder:text-textMain/50 border rounded-30',
+            paddingRightClass,
+            borderClasses
+          )}
           type={inputType}
           {...props}
         />
@@ -69,7 +74,10 @@ export default function Input({
         )}
         {error && (
           <div
-            className={`absolute size-[11px] ${iconErrorPosition} top-1/2 -translate-y-1/2`}
+            className={twMerge(
+              'absolute size-[11px] top-1/2 -translate-y-1/2',
+              iconErrorPosition
+            )}
           >
             <Icon name="close" className="size-[11px] text-rejected" />
           </div>
