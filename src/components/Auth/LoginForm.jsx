@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { PulseLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
-import Input from '@/components/Auth/Input';
+import Input from '@/components/Input';
 import ButtonLink from '@/components/ButtonLink';
 import { LOGIN_FIELDS } from '@/constants/authFields';
 import { buildFormData } from '@/helpers/buildFormData';

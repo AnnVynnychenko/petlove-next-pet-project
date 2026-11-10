@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { PulseLoader } from 'react-spinners';
 import { useRouter } from 'next/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Input from '@/components/Auth/Input';
+import Input from '@/components/Input';
 import ButtonLink from '@/components/ButtonLink';
 import { registerUserAction } from '@/actions/auth';
 import { registrationYupSchema } from '@/yup/registrationYupSchema';
