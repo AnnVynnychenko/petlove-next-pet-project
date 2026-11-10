@@ -1,21 +1,45 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Input from '@/components/Input';
 import { SEARCH_FIELD } from '@/constants/searchField';
 import Icon from './Icon';
+import toast from 'react-hot-toast';
 
 export default function SearchField() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const defaultQuery = searchParams.get('search') || '';
+
   const { register, handleSubmit, reset } = useForm({
-    defaultValues: { search: '' },
+    defaultValues: { search: defaultQuery },
   });
 
   const { name, placeholder, type } = SEARCH_FIELD;
 
-  async function submitData(data) {}
+  async function submitData(data) {
+    const query = data.search?.trim();
+
+    const params = new URLSearchParams(searchParams);
+
+    if (!query) {
+      params.delete('search');
+      router.push(`?${params.toString()}`);
+      toast.error('Enter search request, please!');
+      return;
+    }
+
+    params.set('search', query);
+    router.push(`?${params.toString()}`);
+  }
 
   return (
-    <form className="w-full mt-5" onSubmit={handleSubmit(submitData)}>
+    <form
+      className="w-full mt-5"
+      onSubmit={handleSubmit(submitData)}
+      role="search"
+    >
       <div className="relative flex items-center">
         <Input
           register={register}
