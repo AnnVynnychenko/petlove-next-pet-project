@@ -3,9 +3,7 @@
 import { usePathname } from 'next/navigation';
 
 export const useFindPath = () => {
-  const rawPathname = usePathname() || '';
-
-  const pathname = rawPathname.replace('/petlove-next-pet-project', '') || '/';
+  const pathname = usePathname() || '/';
 
   return {
     isHome: pathname === '/',
