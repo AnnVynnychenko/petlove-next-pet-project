@@ -1,26 +1,36 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Input from '@/components/Input';
 import { SEARCH_FIELD } from '@/constants/searchField';
 import Icon from './Icon';
 import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 
 export default function SearchField() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const defaultQuery = searchParams.get('search') || '';
 
-  const { register, handleSubmit, reset } = useForm({
+  const { name, placeholder, type } = SEARCH_FIELD;
+
+  const { register, handleSubmit, reset, control } = useForm({
     defaultValues: { search: defaultQuery },
   });
 
-  const { name, placeholder, type } = SEARCH_FIELD;
+  const searchValue = useWatch({ control, name: 'search' }) || '';
+
+  useEffect(() => {
+    if (!searchValue.trim() && searchParams.has('search')) {
+      const params = new URLSearchParams(searchParams);
+      params.delete('search');
+      router.push(`?${params.toString()}`);
+    }
+  }, [searchValue, router, searchParams]);
 
   async function submitData(data) {
     const query = data.search?.trim();
-
     const params = new URLSearchParams(searchParams);
 
     if (!query) {
@@ -32,6 +42,10 @@ export default function SearchField() {
 
     params.set('search', query);
     router.push(`?${params.toString()}`);
+  }
+
+  function handleResetSearchField() {
+    reset({ search: '' });
   }
 
   return (
@@ -46,7 +60,7 @@ export default function SearchField() {
           name={name}
           placeholder={placeholder}
           type={type}
-          className="pr-10"
+          className={searchValue ? 'pr-20' : 'pr-10'}
         />
         <button
           type="submit"
@@ -55,6 +69,16 @@ export default function SearchField() {
         >
           <Icon name="search" className="size-4.5" />
         </button>
+        {searchValue && (
+          <button
+            type="button"
+            onClick={handleResetSearchField}
+            aria-label="Clear search field"
+            className="absolute right-11 top-1/2 -translate-y-1/2 grid place-items-center size-8.5"
+          >
+            <Icon name="close" className="size-4" />
+          </button>
+        )}
       </div>
     </form>
   );
