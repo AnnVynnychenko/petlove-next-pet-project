@@ -17,6 +17,9 @@ export const handleApiRequest = async fetchPromise => {
     return { success: true, data };
   } catch (err) {
     console.error('API request error:', err.message);
-    return { success: false, error: 'server connection failed' };
+    return {
+      success: false,
+      error: 'Unable to connect to the server. Please try again in a moment.',
+    };
   }
 };
