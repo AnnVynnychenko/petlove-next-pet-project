@@ -16,7 +16,7 @@ export default function BurgerMenuBtn({
       aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
       aria-expanded={isMenuOpen}
       className={twMerge(
-        'transition-colors duration-custom ease-custom xl:hidden',
+        'transition-colors duration-[var(--duration-custom)] ease-custom xl:hidden',
         burgerClasses
       )}
       {...props}

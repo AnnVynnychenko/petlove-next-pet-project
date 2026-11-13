@@ -17,7 +17,7 @@ export default function Header() {
   const isLoggedIn = useAuthStore(state => state.isLoggedIn);
 
   const burgerClasses = isHome
-    ? 'text-white hover:text-lightAccent focus-visible:text-lightAccent'
+    ? 'text-white hover:text-hoverBtn focus-visible:text-hoverBtn'
     : 'text-textMain hover:text-accent focus-visible:text-accent';
 
   const headerClasses = isHome

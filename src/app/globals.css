@@ -24,8 +24,8 @@
   --leading-tight-custom: 1.29;
   --tracking-tight-custom: -0.03em;
 
+  --duration-custom: 500ms;
   --ease-custom: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-custom: 300ms;
 }
 
 body {

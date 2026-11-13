@@ -52,7 +52,7 @@ export default function Input({
           aria-invalid={Boolean(error)}
           aria-describedby={describedBy}
           className={twMerge(
-            'w-full py-3 pl-3 text-textMain text-sm tracking-tight-custom leading-tight-custom placeholder:text-textMain/50 border rounded-30',
+            'w-full py-3 pl-3 text-textMain text-sm tracking-tight-custom leading-tight-custom placeholder:text-textMain/50 border rounded-30 transition-colors duration-[var(--duration-custom)] ease-custom',
             paddingRightClass,
             borderClasses,
             className
