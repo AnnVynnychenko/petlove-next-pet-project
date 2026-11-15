@@ -1,6 +1,7 @@
 import { formatDate } from '@/helpers/formatDate';
 import Image from 'next/image';
 import Link from 'next/link';
+import defaultNewsImg from '@images/news/default-news-img.webp';
 
 export default function NewsCard({ newsItem, index }) {
   const { imgUrl, title, text, date, url } = newsItem;
@@ -8,10 +9,10 @@ export default function NewsCard({ newsItem, index }) {
 
   const isFirstTwo = index === 0 || index === 1;
   return (
-    <article>
-      <div className="relative w-full h-[190px] rounded-[15px] overflow-hidden">
+    <article className="w-full space-y-5">
+      <div className="relative w-full h-[190px] rounded-[15px] overflow-hidden bg-textMain/10">
         <Image
-          src={imgUrl}
+          src={imgUrl ? imgUrl : defaultNewsImg}
           alt={title || 'News image'}
           fill
           sizes="(max-width: 640px) 100vw"
@@ -19,11 +20,11 @@ export default function NewsCard({ newsItem, index }) {
           className="object-cover"
         />
       </div>
-      <h2 className="mt-5 font-bold leading-[1.25] tracking-tight-custom">
+      <h2 className="font-bold leading-[1.25] tracking-tight-custom">
         {title}
       </h2>
-      <p className="mt-5 leading-tight-custom tracking-[-0.02em]">{text}</p>
-      <div className="flex justify-between items-center mt-5 text-sm tracking-[-0.02em] leading-tight-custom">
+      <p className="leading-tight-custom tracking-[-0.02em]">{text}</p>
+      <div className="flex justify-between items-center text-sm tracking-[-0.02em] leading-tight-custom">
         <div className="text-textMain/50">{formattedDate}</div>
         {url && (
           <Link
