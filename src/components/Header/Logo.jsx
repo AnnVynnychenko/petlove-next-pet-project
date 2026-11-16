@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Icon from '@/components/Icon';
+import { twMerge } from 'tailwind-merge';
 
 export default function Logo({
   textColor = 'text-textMain',
@@ -9,7 +10,10 @@ export default function Logo({
   return (
     <Link
       href="/"
-      className={`flex items-baseline py-[10px] text-xl leading-none font-bold ${textColor}`}
+      className={twMerge(
+        'flex items-baseline py-[10px] text-xl leading-none font-bold outline-accent',
+        textColor
+      )}
       aria-label="Pet love"
       {...props}
     >

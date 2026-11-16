@@ -2,6 +2,7 @@ import { formatDate } from '@/helpers/formatDate';
 import Image from 'next/image';
 import Link from 'next/link';
 import defaultNewsImg from '@images/news/default-news-img.webp';
+import { twMerge } from 'tailwind-merge';
 
 export default function NewsCard({ newsItem, index }) {
   const { imgUrl, title, text, date, url } = newsItem;
@@ -31,7 +32,11 @@ export default function NewsCard({ newsItem, index }) {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent underline decoration-transparent underline-offset-4 transition-all duration-[var(--duration-custom)] ease-custom hover:decoration-accent focus-visible:decoration-accent outline-none"
+            className={twMerge(
+              `text-accent underline decoration-transparent underline-offset-4
+               transition-all duration-[var(--duration-custom)] ease-custom
+               hover:decoration-accent focus-visible:decoration-accent outline-none`
+            )}
           >
             Read more
           </Link>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { twMerge } from 'tailwind-merge';
 
 export default function HelperText({ children, linkText = 'login', ...props }) {
   const href = linkText === 'login' ? '/login' : '/register';
@@ -11,7 +12,12 @@ export default function HelperText({ children, linkText = 'login', ...props }) {
       <span className="text-textMain/50">{children}</span>
       <Link
         href={href}
-        className="capitalize font-bold text-accent underline decoration-transparent underline-offset-4 transition-all duration-[var(--duration-custom)] ease-custom hover:decoration-accent focus-visible:decoration-accent outline-none"
+        className={twMerge(
+          `capitalize font-bold text-accent underline decoration-transparent underline-offset-4
+           transition-all duration-[var(--duration-custom)] ease-custom
+           hover:decoration-accent focus-visible:decoration-accent outline-none
+           `
+        )}
       >
         {linkText}
       </Link>

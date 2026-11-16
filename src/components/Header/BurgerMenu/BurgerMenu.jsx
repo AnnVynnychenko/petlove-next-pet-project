@@ -6,6 +6,7 @@ import { useScrollLock } from '@/hooks/useScrollLock';
 import { useFindPath } from '@/hooks/useFindPath';
 import ButtonLink from '@/components/ButtonLink';
 import { useAuthStore } from '@/store/useAuthStore';
+import { twMerge } from 'tailwind-merge';
 
 export default function BurgerMenu({ onClose }) {
   useScrollLock();
@@ -27,12 +28,18 @@ export default function BurgerMenu({ onClose }) {
         aria-hidden="true"
       ></div>
       <div
-        className={`fixed top-0 right-0 flex flex-col gap-5 justify-between w-[58vw] h-[100dvh] px-5 pt-15 pb-10 ${burgerMenuBgClasses} z-50 xl:hidden`}
+        className={twMerge(
+          'fixed top-0 right-0 flex flex-col gap-5 justify-between w-[58vw] h-[100dvh] px-5 pt-15 pb-10 z-50 xl:hidden',
+          burgerMenuBgClasses
+        )}
       >
         <button
           type="button"
           onClick={onClose}
-          className={`fixed top-9 right-7 size-4 ${burgerCloseBtnColor}`}
+          className={twMerge(
+            'fixed top-9 right-7 size-4 outline-accent',
+            burgerCloseBtnColor
+          )}
           aria-label="Close menu"
         >
           <Icon name="close" className="size-4" />
@@ -56,7 +63,10 @@ export default function BurgerMenu({ onClose }) {
                 href="/login"
                 onClick={onClose}
                 variant="primary"
-                className={`w-full mb-2 uppercase font-bold ${bergerNavBorder}`}
+                className={twMerge(
+                  'w-full mb-2 uppercase font-bold',
+                  bergerNavBorder
+                )}
               >
                 Log in
               </ButtonLink>

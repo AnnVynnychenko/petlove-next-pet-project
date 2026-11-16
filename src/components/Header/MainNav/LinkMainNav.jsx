@@ -23,7 +23,8 @@ export default function LinkMainNav({
         href={href}
         onClick={onClose}
         className={twMerge(
-          'block w-full py-[15px] px-4 text-sm leading-tight-custom tracking-tight-custom border rounded-30 transition-colors duration-[var(--duration-custom)] ease-custom',
+          `block w-full py-[15px] px-4 text-sm leading-tight-custom tracking-tight-custom
+           border rounded-30 transition-colors duration-[var(--duration-custom)] ease-custom outline-none`,
           linkVariantStyles,
           className
         )}
