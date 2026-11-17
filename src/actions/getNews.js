@@ -11,7 +11,9 @@ export async function getNews(searchQuery = '', page = 1, perPage = 6) {
   params.append('page', page);
   params.append('limit', perPage);
 
-  const fetchPromise = fetch(`${API_URL}/news?${params.toString()}`);
+  const fetchPromise = fetch(`${API_URL}/news?${params.toString()}`, {
+    next: { revalidate: 300 },
+  });
 
   return handleApiRequest(fetchPromise);
 }
