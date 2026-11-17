@@ -4,12 +4,14 @@ import { handleApiRequest } from '@/helpers/handleApiRequest';
 
 const API_URL = process.env.API_URL;
 
-export async function getNews(searchQuery = '') {
-  const endpoint = searchQuery
-    ? `/news?search=${encodeURIComponent(searchQuery)}`
-    : '/news';
+export async function getNews(searchQuery = '', page = 1, perPage = 6) {
+  const params = new URLSearchParams();
 
-  const fetchPromise = fetch(`${API_URL}${endpoint}`);
+  if (searchQuery) params.append('keyword', searchQuery);
+  params.append('page', page);
+  params.append('limit', perPage);
+
+  const fetchPromise = fetch(`${API_URL}/news?${params.toString()}`);
 
   return handleApiRequest(fetchPromise);
 }

@@ -1,7 +1,7 @@
 import { getNews } from '@/actions/getNews';
 import { DisplayError } from '@/components/DisplayError';
 import NewsCard from '@/components/News/NewsCard';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/Pagination/Pagination';
 
 export default async function NewsList({
   searchQuery,

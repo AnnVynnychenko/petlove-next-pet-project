@@ -13,7 +13,7 @@ export default async function NewsPage({ searchParams }) {
   const perPage = 6;
 
   return (
-    <section className="pt-8.5">
+    <section className="pt-8.5 pb-20">
       <Title>News</Title>
 
       <Suspense fallback={<SearchFieldSkeleton />}>
