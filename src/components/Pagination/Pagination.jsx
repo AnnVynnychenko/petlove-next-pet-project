@@ -4,6 +4,9 @@ import { usePathname, useRouter } from 'next/navigation';
 import Icon from '@/components/Icon';
 import PaginationBtn from '@/components/Pagination/PaginationBtn';
 import { clampBuilder } from '@/helpers/clampBuilder';
+import { getPaginationPages } from '@/helpers/pagination';
+
+const gapStyles = clampBuilder(4, 10);
 
 export default function Pagination({
   currentPage,
@@ -38,31 +41,16 @@ export default function Pagination({
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
 
-  const getPaginationPages = () => {
-    const pages = [];
-
-    if (totalPages <= 2) {
-      for (let i = 1; i <= totalPages; i += 1) {
-        pages.push(i);
-      }
-    } else if (currentPage <= 2) {
-      pages.push(1, 2, '...');
-    } else {
-      pages.push(currentPage - 1, currentPage, '...');
-    }
-    return pages;
-  };
-
-  const gapStyles = clampBuilder(4, 10);
-
   return (
-    <div
+    <nav
+      role="navigation"
+      aria-label="Pagination navigation"
       style={{ gap: gapStyles }}
       className="flex items-center justify-center w-full mt-11 text-sm font-bold leading-none tracking-tight-custom"
     >
       <PaginationBtn
         onClick={() => goToPage(1)}
-        ariaLabel="Go to first page"
+        aria-label="Go to first page"
         pagePosition={isFirstPage}
       >
         <div className="flex items-center justify-center -space-x-3">
@@ -79,11 +67,12 @@ export default function Pagination({
           <Icon name="arrow-small-left" className="size-5 rotate-180" />
         </div>
       </PaginationBtn>
-      {getPaginationPages().map((page, index) => {
+      {getPaginationPages(totalPages, currentPage).map((page, index) => {
         if (page === '...') {
           return (
             <span
               key={`break-${index}`}
+              aria-hidden="true"
               className="flex items-center justify-center size-10 border border-textMain/20 rounded-full pointer-events-none cursor-not-allowed"
             >
               ...
@@ -98,6 +87,7 @@ export default function Pagination({
             key={page}
             onClick={() => goToPage(page)}
             pageActive={isActive}
+            aria-current={isActive ? 'page' : undefined}
           >
             {page}
           </PaginationBtn>
@@ -106,7 +96,7 @@ export default function Pagination({
       <PaginationBtn
         onClick={() => goToPage(currentPage + 1)}
         pagePosition={isLastPage}
-        ariaLabel="Go to next page"
+        aria-label="Go to next page"
       >
         <div className="flex items-center justify-center">
           <Icon name="arrow-small-left" className="size-5" />
@@ -115,13 +105,13 @@ export default function Pagination({
       <PaginationBtn
         onClick={() => goToPage(totalPages)}
         pagePosition={isLastPage}
-        ariaLabel="Go to last page"
+        aria-label="Go to last page"
       >
         <div className="flex items-center justify-center -space-x-3">
           <Icon name="arrow-small-left" className="size-5" />
           <Icon name="arrow-small-left" className="size-5" />
         </div>
       </PaginationBtn>
-    </div>
+    </nav>
   );
 }

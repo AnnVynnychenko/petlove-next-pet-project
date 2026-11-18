@@ -2,8 +2,15 @@
 
 import { twMerge } from 'tailwind-merge';
 
+const paginationBtnClasses = twMerge(`
+  flex items-center justify-center size-10 border border-textMain/20 rounded-full outline-none
+  transition-colors duration-[var(--duration-custom)] ease-custom
+  hover:border-accent visible-focus:border-accent
+  hover:bg-accent visible-focus:bg-accent
+  hover:text-white visible-focus:text-white
+`);
+
 export default function PaginationBtn({
-  ariaLabel = '',
   pagePosition = false,
   pageActive = false,
   onClick,
@@ -11,19 +18,12 @@ export default function PaginationBtn({
   className,
   ...props
 }) {
-  const paginationBtnClasses = twMerge(`
-  flex items-center justify-center size-10 border border-textMain/20 rounded-full outline-none
-  transition-colors duration-[var(--duration-custom)] ease-custom
-  hover:border-accent visible-focus:border-accent
-  hover:bg-accent visible-focus:bg-accent
-  hover:text-white visible-focus:text-white
-`);
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={pagePosition}
-      aria-label={ariaLabel}
+      aria-disabled={pagePosition}
       className={twMerge(
         paginationBtnClasses,
         pagePosition &&
