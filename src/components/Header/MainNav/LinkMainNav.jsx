@@ -18,7 +18,7 @@ export default function LinkMainNav({
     : 'border-textMain/15 hover:border-accent focus-visible:border-accent';
 
   return (
-    <li className="w-full text-center" {...props}>
+    <li className="w-full text-center">
       <Link
         href={href}
         onClick={onClose}
@@ -28,6 +28,7 @@ export default function LinkMainNav({
           linkVariantStyles,
           className
         )}
+        {...props}
       >
         {children}
       </Link>

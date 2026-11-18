@@ -13,6 +13,7 @@ export default function MainNav({ className = '', onClose = () => {} }) {
           href="/news"
           onClose={onClose}
           className={isNews && 'border-white/50'}
+          aria-current={isNews ? 'page' : undefined}
         >
           News
         </LinkMainNav>
@@ -20,6 +21,7 @@ export default function MainNav({ className = '', onClose = () => {} }) {
           href="/notices"
           onClose={onClose}
           className={isNotices && 'border-white/50'}
+          aria-current={isNotices ? 'page' : undefined}
         >
           Find pet
         </LinkMainNav>
@@ -27,6 +29,7 @@ export default function MainNav({ className = '', onClose = () => {} }) {
           href="/friends"
           onClose={onClose}
           className={isFriends && 'border-white/50'}
+          aria-current={isFriends ? 'page' : undefined}
         >
           Our friends
         </LinkMainNav>
