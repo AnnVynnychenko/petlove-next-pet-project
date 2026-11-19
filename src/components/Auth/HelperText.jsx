@@ -12,12 +12,10 @@ export default function HelperText({ children, linkText = 'login', ...props }) {
       <span className="text-textMain/50">{children}</span>
       <Link
         href={href}
-        className={twMerge(
-          `capitalize font-bold text-accent underline decoration-transparent underline-offset-4
+        className={`capitalize font-bold text-accent underline decoration-transparent underline-offset-4
            transition-all duration-[var(--duration-custom)] ease-custom
            hover:decoration-accent focus-visible:decoration-accent outline-none
-           `
-        )}
+           `}
       >
         {linkText}
       </Link>

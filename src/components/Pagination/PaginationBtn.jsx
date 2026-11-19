@@ -2,13 +2,13 @@
 
 import { twMerge } from 'tailwind-merge';
 
-const paginationBtnClasses = twMerge(`
-  flex items-center justify-center size-10 border border-textMain/20 rounded-full outline-none
+const paginationBtnClasses = `
+  flex items-center justify-center shrink-0 size-10 border border-textMain/20 rounded-full outline-none
   transition-colors duration-[var(--duration-custom)] ease-custom
   hover:border-accent visible-focus:border-accent
   hover:bg-accent visible-focus:bg-accent
   hover:text-white visible-focus:text-white
-`);
+`;
 
 export default function PaginationBtn({
   pagePosition = false,

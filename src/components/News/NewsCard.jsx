@@ -32,11 +32,9 @@ export default function NewsCard({ newsItem, index }) {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className={twMerge(
-              `text-accent underline decoration-transparent underline-offset-4
+            className={`text-accent underline decoration-transparent underline-offset-4
                transition-all duration-[var(--duration-custom)] ease-custom
-               hover:decoration-accent focus-visible:decoration-accent outline-none`
-            )}
+               hover:decoration-accent focus-visible:decoration-accent outline-none`}
           >
             Read more
           </Link>

@@ -52,7 +52,7 @@ export default function Input({
           aria-invalid={Boolean(error)}
           aria-describedby={describedBy}
           className={twMerge(
-            `w-full py-3 pl-3 text-textMain text-sm tracking-tight-custom leading-tight-custom placeholder:text-textMain/50
+            `w-full py-3 pl-3 text-textMain text-sm tracking-tight-custom placeholder:text-textMain/50
             border rounded-30 transition-colors duration-[var(--duration-custom)] ease-custom`,
             paddingRightClass,
             borderClasses,
@@ -96,7 +96,7 @@ export default function Input({
       )}
       {error && (
         <p
-          id={`${name}-error`}
+          id={errorId}
           className="ml-3 mt-[2px] text-[10px] text-rejected tracking-tight-custom leading-[1.2]"
         >
           {error.message}
