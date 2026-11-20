@@ -73,7 +73,7 @@ export default function Pagination({
             <span
               key={`break-${index}`}
               aria-hidden="true"
-              className="flex items-center justify-center size-10 border border-textMain/20 rounded-full pointer-events-none cursor-not-allowed"
+              className="flex items-center justify-center shrink-0 size-10 border border-textMain/20 rounded-full pointer-events-none cursor-not-allowed"
             >
               ...
             </span>
