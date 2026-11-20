@@ -1,26 +1,18 @@
-import { formatDate } from '@/helpers/formatDate';
-import Image from 'next/image';
 import Link from 'next/link';
 import defaultNewsImg from '@images/news/default-news-img.webp';
-import { twMerge } from 'tailwind-merge';
+import CardImgBg from '@/components/CardImgBg';
+import { formatDate } from '@/helpers/formatDate';
 
 export default function NewsCard({ newsItem, index }) {
   const { imgUrl, title, text, date, url } = newsItem;
   const formattedDate = formatDate(date);
 
-  const isFirstTwo = index === 0 || index === 1;
+  const src = imgUrl ? imgUrl : defaultNewsImg;
+  const alt = title || 'News image';
+
   return (
     <article className="w-full space-y-5">
-      <div className="relative w-full h-[190px] rounded-[15px] overflow-hidden bg-textMain/10">
-        <Image
-          src={imgUrl ? imgUrl : defaultNewsImg}
-          alt={title || 'News image'}
-          fill
-          sizes="(max-width: 640px) 100vw"
-          priority={isFirstTwo}
-          className="object-cover"
-        />
-      </div>
+      <CardImgBg src={src} alt={alt} index={index} className="h-[190px]" />
       <h2 className="font-bold leading-[1.25] tracking-tight-custom">
         {title}
       </h2>
