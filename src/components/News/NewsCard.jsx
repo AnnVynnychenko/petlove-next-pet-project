@@ -11,14 +11,23 @@ export default function NewsCard({ newsItem, index }) {
   const alt = title || 'News image';
 
   return (
-    <article className="w-full space-y-5">
-      <CardImgBg src={src} alt={alt} index={index} className="h-[190px]" />
-      <h2 className="font-bold leading-[1.25] tracking-tight-custom">
+    <article className="flex flex-col h-[379px] w-full gap-5 overflow-hidden">
+      <CardImgBg
+        src={src}
+        alt={alt}
+        index={index}
+        className="h-[190px] shrink-0"
+      />
+      <h2 className="font-bold leading-[1.25] tracking-tight-custom line-clamp-1 break-words shrink-0">
         {title}
       </h2>
-      <p className="leading-tight-custom tracking-[-0.02em]">{text}</p>
-      <div className="flex justify-between items-center text-sm tracking-[-0.02em] leading-tight-custom">
-        <div className="text-textMain/50">{formattedDate}</div>
+      <p className="leading-tight-custom tracking-tight-soft line-clamp-3 break-words">
+        {text}
+      </p>
+      <div className="mt-auto flex justify-between items-center gap-3 text-sm tracking-tight-soft leading-tight-custom shrink-0">
+        <time dateTime={date} className="text-textMain/50 shrink-0">
+          {formattedDate}
+        </time>
         {url && (
           <Link
             href={url}
