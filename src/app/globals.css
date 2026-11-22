@@ -18,11 +18,14 @@
   --color-male: #54adff;
   --color-rejected: #ef2447;
   --color-approve: #08aa83;
+  --color-gold: #ffc531;
+  --color-textSecondary: #2b2b2a;
 
   --radius-30: 30px;
 
   --leading-tight-custom: 1.29;
   --tracking-tight-custom: -0.03em;
+  --tracking-tight-soft: -0.02em;
 
   --duration-custom: 500ms;
   --ease-custom: cubic-bezier(0.4, 0, 0.2, 1);
@@ -59,7 +62,6 @@ a {
 }
 
 button {
-  display: block;
   cursor: pointer;
 }
 
