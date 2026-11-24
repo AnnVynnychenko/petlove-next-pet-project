@@ -6,7 +6,7 @@ import { PulseLoader } from 'react-spinners';
 import { useRouter } from 'next/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '@/components/Input';
-import ButtonLink from '@/components/ButtonLink';
+import ButtonLink from '@/components/Buttons/ButtonLink';
 import { registerUserAction } from '@/actions/auth';
 import { registrationYupSchema } from '@/yup/registrationYupSchema';
 import { buildFormData } from '@/helpers/buildFormData';
