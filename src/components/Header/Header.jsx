@@ -21,7 +21,7 @@ export default function Header() {
     : 'text-textMain hover:text-accent focus-visible:text-accent';
 
   const headerClasses = isHome
-    ? 'mt-2.5 rounded-t-[30px] bg-accent pt-4.5 pb-4.5 px-5'
+    ? 'mt-2.5 rounded-t-30 bg-accent pt-4.5 pb-4.5 px-5'
     : 'pt-6 pb-4';
 
   return (

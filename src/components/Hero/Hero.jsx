@@ -6,7 +6,7 @@ export default function Hero() {
   const textSize = clampBuilder(45, 50);
   return (
     <section className="w-full ">
-      <div className="flex flex-col items-center justify-items-center gap-6 px-5 pt-10.5 pb-12.5 bg-accent rounded-b-[30px] -mt-[1px]">
+      <div className="flex flex-col items-center justify-items-center gap-6 px-5 pt-10.5 pb-12.5 bg-accent rounded-b-30 -mt-[1px]">
         <h1
           style={{ fontSize: textSize }}
           className="font-bold leading-none text-white"

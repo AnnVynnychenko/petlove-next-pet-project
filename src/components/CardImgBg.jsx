@@ -7,7 +7,7 @@ export default function CardImgBg({ src, alt = '', index, className = '' }) {
   return (
     <div
       className={twMerge(
-        'relative w-full rounded-[16px] overflow-hidden bg-textMain/10',
+        'relative w-full rounded-2xl overflow-hidden bg-textMain/10',
         className
       )}
     >
