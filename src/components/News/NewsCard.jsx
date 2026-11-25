@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import defaultNewsImg from '@images/news/default-news-img.webp';
 import CardImgBg from '@/components/CardImgBg';
-import { formatDate } from '@/helpers/formatDate';
+import { formatDateSlash } from '@/helpers/formatDate';
 
 export default function NewsCard({ newsItem, index }) {
   const { imgUrl, title, text, date, url } = newsItem;
-  const formattedDate = formatDate(date);
+  const formattedDate = formatDateSlash(date);
 
   const src = imgUrl ? imgUrl : defaultNewsImg;
   const alt = title || 'News image';
