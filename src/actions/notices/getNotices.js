@@ -23,7 +23,9 @@ export async function getNotices(
   params.append('page', currentPage);
   params.append('limit', perPage);
 
-  const fetchPromise = fetch(`${API_URL}/notices?${params.toString()}`);
+  const fetchPromise = fetch(`${API_URL}/notices?${params.toString()}`, {
+    cache: 'no-store',
+  });
 
   return handleApiRequest(fetchPromise);
 }
