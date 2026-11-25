@@ -9,7 +9,7 @@ export default function EyeIconBtn({
   return (
     <button
       type="button"
-      className="size-4.5 text-accent"
+      className="block size-4.5 text-accent"
       onClick={togglePasswordVisibility}
       aria-label={showPassword ? 'Hide password' : 'Show password'}
     >
