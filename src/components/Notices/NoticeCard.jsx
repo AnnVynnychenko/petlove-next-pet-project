@@ -1,7 +1,10 @@
 'use client';
 
-import Icon from '@/components/Icon';
 import { twMerge } from 'tailwind-merge';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { PulseLoader } from 'react-spinners';
+import Icon from '@/components/Icon';
 import defaultNoticeImg from '@images/notices/default-notice-img.webp';
 import ButtonLink from '@/components/Buttons/ButtonLink';
 import CardImgBg from '@/components/CardImgBg';
@@ -10,16 +13,25 @@ import { formatPrice } from '@/helpers/formatPrice';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useToggle } from '@/hooks/useToggle';
 import ModalAttention from '@/components/Modals/ModalAttention';
+import ModalPetDetails from '@/components/Modals/PetDetails/ModalPetDetails';
+import { formatDateDot } from '@/helpers/formatDate';
+import { getNoticeDetails } from '@/actions/notices/getNoticeDetails';
 
 export default function NoticeCard({ noticeItem, index }) {
   const isLoggedIn = useAuthStore(state => state.isLoggedIn);
-  const { isOpen: isDetailsPopUpOpen, toggle: toggleDetailsPopUp } =
+  const token = useAuthStore(state => state.token);
+
+  const { isOpen: isModalPetDetailsOpen, toggle: toggleModalPetDetails } =
     useToggle(false);
   const { isOpen: isPetFavorite, toggle: togglePetFavorite } = useToggle(false);
   const { isOpen: isModalAttentionOpen, toggle: toggleModalAttention } =
     useToggle(false);
 
+  const [petDetails, setPetDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
+    _id,
     species,
     category,
     price,
@@ -32,9 +44,11 @@ export default function NoticeCard({ noticeItem, index }) {
     popularity,
   } = noticeItem;
 
+  const formattedBirthday = formatDateDot(birthday);
+
   const detailedInfo = {
     name,
-    birthday,
+    formattedBirthday,
     sex,
     species,
     category,
@@ -47,15 +61,30 @@ export default function NoticeCard({ noticeItem, index }) {
 
   const petFavoriteStyles = isPetFavorite ? 'bg-hoverBtn' : 'bg-lightAccent';
 
-  function handleLearnMoreClick() {
+  async function handleLearnMoreClick() {
     if (!isLoggedIn) {
       toggleModalAttention(true);
+      return;
     }
+
+    setIsLoading(true);
+    toggleModalPetDetails(true);
+
+    const response = await getNoticeDetails(_id, token);
+
+    if (response.success) {
+      setPetDetails(response.data);
+    } else {
+      toggleModalPetDetails(false);
+      toast.error(response.error || 'Failed to load pet details');
+    }
+
+    setIsLoading(false);
   }
 
   return (
     <>
-      <div className="flex flex-col w-full h-[454px] p-6 bg-white rounded-2xl text-textSecondary overflow-hidden">
+      <article className="flex flex-col w-full h-[454px] p-6 bg-white rounded-2xl text-textSecondary overflow-hidden">
         <CardImgBg
           src={src}
           alt={alt}
@@ -90,10 +119,15 @@ export default function NoticeCard({ noticeItem, index }) {
             <ButtonLink
               type="button"
               variant="primary"
-              className="py-3.5 flex-1"
+              disabled={isLoading}
+              className="h-11.5 flex-1 py-3.5"
               onClick={handleLearnMoreClick}
             >
-              Learn more
+              {isLoading ? (
+                <PulseLoader color="var(--color-white)" size={8} />
+              ) : (
+                'Learn more'
+              )}
             </ButtonLink>
             <button
               type="button"
@@ -113,9 +147,16 @@ export default function NoticeCard({ noticeItem, index }) {
             </button>
           </div>
         </div>
-      </div>
+      </article>
       {isModalAttentionOpen && (
         <ModalAttention onClose={toggleModalAttention} />
+      )}
+      {isModalPetDetailsOpen && (
+        <ModalPetDetails
+          onClose={toggleModalPetDetails}
+          petDetails={petDetails}
+          isLoading={isLoading}
+        />
       )}
     </>
   );
