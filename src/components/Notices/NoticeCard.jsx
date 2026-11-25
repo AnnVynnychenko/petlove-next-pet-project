@@ -68,12 +68,12 @@ export default function NoticeCard({ noticeItem, index }) {
     }
 
     setIsLoading(true);
-    toggleModalPetDetails(true);
 
     const response = await getNoticeDetails(_id, token);
 
     if (response.success) {
       setPetDetails(response.data);
+      toggleModalPetDetails(true);
     } else {
       toggleModalPetDetails(false);
       toast.error(response.error || 'Failed to load pet details');
