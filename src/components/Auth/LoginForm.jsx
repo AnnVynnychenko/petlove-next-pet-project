@@ -1,6 +1,7 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { PulseLoader } from 'react-spinners';
@@ -17,8 +18,8 @@ import { useAuthStore } from '@/store/useAuthStore';
 
 export default function LoginForm() {
   const router = useRouter();
-
   const setAuth = useAuthStore(state => state.setAuth);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const {
     register,
@@ -26,12 +27,13 @@ export default function LoginForm() {
     formState: { errors, isSubmitting },
     control,
     trigger,
-    reset,
   } = useForm({
     defaultValues: { email: '', password: '' },
     resolver: yupResolver(loginYupSchema),
     mode: 'onBlur',
   });
+
+  const isBusy = isSubmitting || isRedirecting;
 
   const { isSecure } = usePasswordValidation(control, trigger);
 
@@ -43,11 +45,13 @@ export default function LoginForm() {
       });
       const result = await loginUserAction(formData);
 
-      handleAuthResponse(result, router, reset, setAuth, {
+      handleAuthResponse(result, router, setAuth, {
         successMessage: 'Login successful!',
         redirectTo: '/profile',
+        onRedirectStart: () => setIsRedirecting(true),
       });
     } catch (err) {
+      setIsRedirecting(false);
       toast.error(err.message || 'Network error, try again later');
       console.error(err.message);
     }
@@ -74,6 +78,7 @@ export default function LoginForm() {
             placeholder={placeholder}
             autoComplete={autoComplete}
             type={type}
+            disabled={isBusy}
             isPassword={isPassword}
             isSecurePassword={name === 'password' ? isSecure : undefined}
             error={errors[name]}
@@ -84,10 +89,10 @@ export default function LoginForm() {
       <ButtonLink
         type="submit"
         variant="primary"
-        className="mt-7.5 uppercase font-bold"
-        disabled={isSubmitting}
+        className="h-10.5 mt-7.5 uppercase font-bold"
+        disabled={isBusy}
       >
-        {isSubmitting ? (
+        {isBusy ? (
           <PulseLoader color="var(--color-white)" size={8} />
         ) : (
           'log in'
