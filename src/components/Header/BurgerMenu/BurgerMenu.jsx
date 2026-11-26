@@ -28,10 +28,7 @@ export default function BurgerMenu({ onClose }) {
     <>
       <div
         onClick={onClose}
-        className={twMerge(
-          'fixed inset-0 bg-transparent xl:hidden',
-          menuBackdrop
-        )}
+        className={twMerge('fixed inset-0 bg-transparent', menuBackdrop)}
         aria-hidden="true"
       ></div>
       <div
@@ -39,7 +36,7 @@ export default function BurgerMenu({ onClose }) {
         aria-modal="true"
         aria-label="Navigation menu"
         className={twMerge(
-          'fixed top-0 right-0 flex flex-col gap-5 justify-between w-[58vw] h-[100dvh] px-5 pt-15 pb-10 xl:hidden',
+          'fixed top-0 right-0 flex flex-col gap-5 justify-between w-[58vw] h-[100dvh] px-5 pt-15 pb-10',
           menu,
           burgerMenuBgClasses
         )}

@@ -31,9 +31,6 @@ export default function Header() {
           textColor={isHome ? 'text-white' : undefined}
           heartStyles={isHome ? 'text-white' : 'text-accent'}
         />
-        <div className="hidden xl:block">
-          <MainNav />
-        </div>
         <div className="flex gap-3">
           {isLoggedIn && <UserAvatar />}
           <BurgerMenuBtn

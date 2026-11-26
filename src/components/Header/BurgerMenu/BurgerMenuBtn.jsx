@@ -16,12 +16,12 @@ export default function BurgerMenuBtn({
       aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
       aria-expanded={isMenuOpen}
       className={twMerge(
-        'transition-colors duration-[var(--duration-custom)] ease-custom outline-none xl:hidden',
+        'transition-colors duration-[var(--duration-custom)] ease-custom outline-none',
         burgerClasses
       )}
       {...props}
     >
-      <Icon name="burger-menu" className="size-8 xl:hidden" />
+      <Icon name="burger-menu" className="size-8" />
     </button>
   );
 }
